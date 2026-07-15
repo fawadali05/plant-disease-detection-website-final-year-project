@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-5 mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+                <div class="card-header bg-success text-white py-4 text-center">
+                    <i class="bi bi-person-plus fs-1 mb-2 d-block"></i>
+                    <h4 class="mb-0 fw-bold">Create Account</h4>
+                    <p class="small mb-0 opacity-75">Join PlantDoc to detect plant diseases</p>
+                </div>
+                <div class="card-body p-4">
+                    <form method="POST" action="{{ url_for('auth.register') }}">
+                        {{ form.hidden_tag() }}
+                        
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">{{ form.name.label.text }}</label>
+                            {{ form.name(class="form-control", placeholder="Enter your full name") }}
+                            {% if form.name.errors %}
+                            <div class="text-danger small mt-1">{{ form.name.errors[0] }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">{{ form.email.label.text }}</label>
+                            {{ form.email(class="form-control", placeholder="Enter your email") }}
+                            {% if form.email.errors %}
+                            <div class="text-danger small mt-1">{{ form.email.errors[0] }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">{{ form.password.label.text }}</label>
+                            {{ form.password(class="form-control", placeholder="Create a password (min 6 characters)") }}
+                            {% if form.password.errors %}
+                            <div class="text-danger small mt-1">{{ form.password.errors[0] }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">{{ form.confirm_password.label.text }}</label>
+                            {{ form.confirm_password(class="form-control", placeholder="Confirm your password") }}
+                            {% if form.confirm_password.errors %}
+                            <div class="text-danger small mt-1">{{ form.confirm_password.errors[0] }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="form-check mb-4">
+                            <input class="form-check-input" type="checkbox" id="agreeTerms" required>
+                            <label class="form-check-label small" for="agreeTerms">
+                                I agree to the <a href="{{ url_for('main.terms') }}" class="text-success">Terms of Service</a> 
+                                and <a href="{{ url_for('main.privacy') }}" class="text-success">Privacy Policy</a>
+                            </label>
+                        </div>
+                        
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-success btn-lg fw-semibold">
+                                <i class="bi bi-check-circle me-2"></i>Create Account
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer bg-light py-3 text-center">
+                    <p class="mb-0">
+                        Already have an account? 
+                        <a href="{{ url_for('auth.login') }}" class="text-success fw-semibold">Sign In</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

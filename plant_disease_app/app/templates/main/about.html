@@ -1,0 +1,176 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Hero -->
+<section class="bg-success text-white py-5">
+    <div class="container py-5 text-center">
+        <h1 class="display-4 fw-bold mb-3">About PlantDoc</h1>
+        <p class="lead">Final Year Project - AI-Powered Plant Disease Detection System</p>
+    </div>
+</section>
+
+<!-- Project Info -->
+<section class="py-5">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6">
+                <h2 class="fw-bold mb-4">Project Overview</h2>
+                <p class="text-muted lead mb-4">
+                    PlantDoc is an AI-powered web application designed to help farmers, gardeners, and 
+                    agricultural professionals identify plant diseases quickly and accurately.
+                </p>
+                <p class="text-muted mb-4">
+                    Using state-of-the-art deep learning techniques, specifically Convolutional Neural 
+                    Networks (CNN), our system can analyze images of plant leaves and identify diseases 
+                    with high accuracy, providing treatment recommendations and prevention tips.
+                </p>
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="bg-light rounded-3 p-3 text-center">
+                            <div class="fs-3 fw-bold text-success">38+</div>
+                            <small class="text-muted">Disease Classes</small>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="bg-light rounded-3 p-3 text-center">
+                            <div class="fs-3 fw-bold text-success">14</div>
+                            <small class="text-muted">Plant Species</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card border-0 shadow-lg rounded-4 p-4">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 300'%3E%3Crect fill='%23f8f9fa' width='500' height='300'/%3E%3Crect x='50' y='50' width='180' height='200' rx='10' fill='%23e8f5e9'/%3E%3Ccircle cx='140' cy='130' r='50' fill='%2381c784'/%3E%3Crect x='270' y='50' width='180' height='200' rx='10' fill='%23e3f2fd'/%3E%3Ccircle cx='360' cy='130' r='50' fill='%2390caf9'/%3E%3Ctext x='250' y='270' text-anchor='middle' font-size='16' fill='%23666'%3EAI-Powered Detection%3C/text%3E%3C/svg%3E" 
+                         alt="Project Overview" class="img-fluid rounded-3">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Team Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold mb-3">Project Team</h2>
+            <p class="text-muted">Meet the developers behind PlantDoc</p>
+        </div>
+        <div class="row justify-content-center g-4">
+            <div class="col-lg-5">
+                <div class="card border-0 shadow-sm rounded-4 text-center p-4">
+                    <div class="avatar bg-success bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 100px; height: 100px;">
+                        <i class="bi bi-person-fill text-success fs-1"></i>
+                    </div>
+                    <h4 class="fw-bold mb-1">Fawad Ali</h4>
+                    <p class="text-muted mb-3">Team Lead & Developer</p>
+                    <p class="small text-muted">
+                        Responsible for project coordination, ML model development, and Flask backend implementation.
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="card border-0 shadow-sm rounded-4 text-center p-4">
+                    <div class="avatar bg-success bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 100px; height: 100px;">
+                        <i class="bi bi-person-fill text-success fs-1"></i>
+                    </div>
+                    <h4 class="fw-bold mb-1">Syed Asad Ullah</h4>
+                    <p class="text-muted mb-3">Developer & Designer</p>
+                    <p class="small text-muted">
+                        Focused on frontend development, user interface design, and database management.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Technology Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold mb-3">Technology Stack</h2>
+            <p class="text-muted">Built with modern technologies and frameworks</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-0 shadow-sm h-100 text-center p-4">
+                    <i class="bi bi-robot text-success fs-1 mb-3"></i>
+                    <h5 class="fw-bold">Machine Learning</h5>
+                    <p class="text-muted small">TensorFlow, Keras, CNN (ResNet50/MobileNetV2)</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-0 shadow-sm h-100 text-center p-4">
+                    <i class="bi bi-code-slash text-primary fs-1 mb-3"></i>
+                    <h5 class="fw-bold">Backend</h5>
+                    <p class="text-muted small">Python, Flask, SQLAlchemy, SQLite/MySQL</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-0 shadow-sm h-100 text-center p-4">
+                    <i class="bi bi-palette text-warning fs-1 mb-3"></i>
+                    <h5 class="fw-bold">Frontend</h5>
+                    <p class="text-muted small">HTML5, CSS3, Bootstrap 5, JavaScript</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-0 shadow-sm h-100 text-center p-4">
+                    <i class="bi bi-database text-info fs-1 mb-3"></i>
+                    <h5 class="fw-bold">Database</h5>
+                    <p class="text-muted small">SQLite (dev), MySQL (production)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Dataset Section -->
+<section class="py-5 bg-success text-white">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <h3 class="fw-bold mb-3">Training Dataset</h3>
+                <p class="mb-3">
+                    Our model is trained on the <strong>PlantVillage dataset</strong>, one of the largest 
+                    publicly available datasets for plant disease classification.
+                </p>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><i class="bi bi-check-circle-fill me-2"></i>Over 50,000 labeled images</li>
+                    <li class="mb-2"><i class="bi bi-check-circle-fill me-2"></i>38 disease classes across 14 species</li>
+                    <li class="mb-2"><i class="bi bi-check-circle-fill me-2"></i>Originally published by Sporran et al.</li>
+                    <li class="mb-2"><i class="bi bi-check-circle-fill me-2"></i>Available on Kaggle and HuggingFace</li>
+                </ul>
+            </div>
+            <div class="col-lg-4 text-center">
+                <i class="bi bi-flower1 fs-1 mb-3 d-block opacity-50"></i>
+                <div class="fs-3 fw-bold">PlantVillage</div>
+                <small>Dataset</small>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Acknowledgments -->
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h2 class="fw-bold mb-4">Acknowledgments</h2>
+                <p class="text-muted mb-4">
+                    We would like to express our gratitude to our supervisor and the university for their 
+                    guidance and support throughout this project.
+                </p>
+                <div class="card border-0 shadow-sm bg-light">
+                    <div class="card-body py-4">
+                        <p class="mb-0">
+                            <i class="bi bi-building me-2 text-success"></i>
+                            Final Year Project - Department of Computer Science
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

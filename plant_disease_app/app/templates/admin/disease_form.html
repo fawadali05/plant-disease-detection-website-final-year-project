@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-4 mt-5">
+    <nav aria-label="breadcrumb" class="mb-3">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('main.home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('admin.dashboard') }}">Admin</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('admin.diseases') }}">Diseases</a></li>
+            <li class="breadcrumb-item active">{{ action }} Disease</li>
+        </ol>
+    </nav>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-lg rounded-4">
+                <div class="card-header bg-success text-white py-3">
+                    <h5 class="mb-0 fw-bold"><i class="bi bi-{{ 'plus' if action == 'Add' else 'pencil' }}-circle me-2"></i>{{ action }} Disease</h5>
+                </div>
+                <div class="card-body p-4">
+                    <form method="POST">
+                        {{ form.hidden_tag() }}
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label fw-semibold">{{ form.disease_name.label.text }}</label>
+                                    {{ form.disease_name(class="form-control") }}
+                                    {% if form.disease_name.errors %}
+                                    <div class="text-danger small mt-1">{{ form.disease_name.errors[0] }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label fw-semibold">{{ form.plant_type.label.text }}</label>
+                                    {{ form.plant_type(class="form-control") }}
+                                    {% if form.plant_type.errors %}
+                                    <div class="text-danger small mt-1">{{ form.plant_type.errors[0] }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label fw-semibold">{{ form.category.label.text }}</label>
+                                    {{ form.category(class="form-select") }}
+                                    {% if form.category.errors %}
+                                    <div class="text-danger small mt-1">{{ form.category.errors[0] }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label fw-semibold">{{ form.severity.label.text }}</label>
+                                    {{ form.severity(class="form-select") }}
+                                    {% if form.severity.errors %}
+                                    <div class="text-danger small mt-1">{{ form.severity.errors[0] }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">{{ form.description.label.text }}</label>
+                            {{ form.description(class="form-control", rows="3") }}
+                            {% if form.description.errors %}
+                            <div class="text-danger small mt-1">{{ form.description.errors[0] }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">{{ form.symptoms.label.text }}</label>
+                            {{ form.symptoms(class="form-control", rows="2") }}
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">{{ form.causes.label.text }}</label>
+                            {{ form.causes(class="form-control", rows="2") }}
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">{{ form.treatment.label.text }}</label>
+                            {{ form.treatment(class="form-control", rows="3") }}
+                            {% if form.treatment.errors %}
+                            <div class="text-danger small mt-1">{{ form.treatment.errors[0] }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">{{ form.prevention.label.text }}</label>
+                            {{ form.prevention(class="form-control", rows="2") }}
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label fw-semibold">{{ form.pesticides.label.text }}</label>
+                                    {{ form.pesticides(class="form-control", rows="2") }}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label fw-semibold">{{ form.recovery_time.label.text }}</label>
+                                    {{ form.recovery_time(class="form-control") }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between mt-4">
+                            <a href="{{ url_for('admin.diseases') }}" class="btn btn-outline-secondary">
+                                <i class="bi bi-arrow-left me-2"></i>Cancel
+                            </a>
+                            <button type="submit" class="btn btn-success">
+                                <i class="bi bi-check2 me-2"></i>{{ action }} Disease
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-5 mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-5 col-md-7">
+            <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+                <div class="card-header bg-success text-white py-4 text-center">
+                    <i class="bi bi-flower1 fs-1 mb-2 d-block"></i>
+                    <h4 class="mb-0 fw-bold">Welcome Back</h4>
+                    <p class="small mb-0 opacity-75">Sign in to your PlantDoc account</p>
+                </div>
+                <div class="card-body p-4">
+                    <form method="POST" action="{{ url_for('auth.login') }}">
+                        {{ form.hidden_tag() }}
+                        
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">{{ form.email.label.text }}</label>
+                            {{ form.email(class="form-control form-control-lg", placeholder="Enter your email") }}
+                            {% if form.email.errors %}
+                            <div class="text-danger small mt-1">{{ form.email.errors[0] }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">{{ form.password.label.text }}</label>
+                            {{ form.password(class="form-control form-control-lg", placeholder="Enter your password") }}
+                            {% if form.password.errors %}
+                            <div class="text-danger small mt-1">{{ form.password.errors[0] }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="mb-4">
+                            <div class="form-check">
+                                {{ form.remember(class="form-check-input") }}
+                                <label class="form-check-label">{{ form.remember.label.text }}</label>
+                            </div>
+                        </div>
+                        
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-success btn-lg fw-semibold">
+                                <i class="bi bi-box-arrow-in-right me-2"></i>Sign In
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer bg-light py-3 text-center">
+                    <p class="mb-2">
+                        <a href="{{ url_for('auth.forgot_password') }}" class="text-success">Forgot Password?</a>
+                    </p>
+                    <p class="mb-0">
+                        Don't have an account? 
+                        <a href="{{ url_for('auth.register') }}" class="text-success fw-semibold">Register</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

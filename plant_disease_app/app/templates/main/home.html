@@ -1,0 +1,232 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section bg-success text-white py-5">
+    <div class="container py-5">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="display-4 fw-bold mb-4">
+                    <i class="bi bi-flower1 me-3"></i>Plant Disease Detection
+                </h1>
+                <p class="lead mb-4">
+                    Upload a leaf image and get instant AI-powered diagnosis with treatment recommendations. 
+                    Protect your crops with our advanced deep learning system.
+                </p>
+                <div class="d-flex gap-3 flex-wrap">
+                    {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('user.detect') }}" class="btn btn-light btn-lg text-success fw-semibold">
+                        <i class="bi bi-camera me-2"></i>Start Detection
+                    </a>
+                    {% else %}
+                    <a href="{{ url_for('auth.register') }}" class="btn btn-light btn-lg text-success fw-semibold">
+                        <i class="bi bi-rocket-takeoff me-2"></i>Get Started Free
+                    </a>
+                    <a href="{{ url_for('auth.login') }}" class="btn btn-outline-light btn-lg">
+                        <i class="bi bi-box-arrow-in-right me-2"></i>Login
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-lg-6 text-center mt-4 mt-lg-0">
+                <div class="hero-image">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect fill='%234CAF50' rx='20' width='400' height='300'/%3E%3Ccircle cx='200' cy='130' r='60' fill='%2381C784'/%3E%3Cellipse cx='200' cy='220' rx='80' ry='40' fill='%2366BB6A'/%3E%3Cpath d='M200 70 Q230 100 200 130 Q170 100 200 70' fill='%234CAF50'/%3E%3C/svg%3E" 
+                         alt="Plant Disease Detection" class="img-fluid rounded-4 shadow-lg">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row g-4 text-center">
+            <div class="col-md-4">
+                <div class="stat-card p-4 bg-white rounded-4 shadow-sm">
+                    <div class="display-4 text-success fw-bold">{{ total_detections }}</div>
+                    <div class="text-muted">Total Detections</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stat-card p-4 bg-white rounded-4 shadow-sm">
+                    <div class="display-4 text-success fw-bold">{{ total_diseases }}</div>
+                    <div class="text-muted">Disease Classes</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stat-card p-4 bg-white rounded-4 shadow-sm">
+                    <div class="display-4 text-success fw-bold">14</div>
+                    <div class="text-muted">Plant Types</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">How PlantDoc Works</h2>
+            <p class="text-muted">Four simple steps to protect your plants</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="card h-100 border-0 shadow-sm feature-card">
+                    <div class="card-body text-center p-4">
+                        <div class="feature-icon bg-success bg-opacity-10 text-success rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                            <i class="bi bi-camera fs-2"></i>
+                        </div>
+                        <h5 class="card-title fw-bold">1. Upload Image</h5>
+                        <p class="card-text text-muted">Take a photo of a plant leaf showing symptoms or upload an existing image.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card h-100 border-0 shadow-sm feature-card">
+                    <div class="card-body text-center p-4">
+                        <div class="feature-icon bg-success bg-opacity-10 text-success rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                            <i class="bi bi-cpu fs-2"></i>
+                        </div>
+                        <h5 class="card-title fw-bold">2. AI Analysis</h5>
+                        <p class="card-text text-muted">Our deep learning model analyzes the image to identify disease patterns.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card h-100 border-0 shadow-sm feature-card">
+                    <div class="card-body text-center p-4">
+                        <div class="feature-icon bg-success bg-opacity-10 text-success rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                            <i class="bi bi-clipboard-check fs-2"></i>
+                        </div>
+                        <h5 class="card-title fw-bold">3. Get Diagnosis</h5>
+                        <p class="card-text text-muted">Receive instant diagnosis with confidence score and disease details.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card h-100 border-0 shadow-sm feature-card">
+                    <div class="card-body text-center p-4">
+                        <div class="feature-icon bg-success bg-opacity-10 text-success rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                            <i class="bi bi-heart-pulse fs-2"></i>
+                        </div>
+                        <h5 class="card-title fw-bold">4. Treatment</h5>
+                        <p class="card-text text-muted">Get recommended treatments, prevention tips, and recovery guidance.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Disease Database Preview -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h2 class="fw-bold mb-1">Disease Database</h2>
+                <p class="text-muted mb-0">Explore common plant diseases and their treatments</p>
+            </div>
+            <a href="{{ url_for('main.diseases_list') }}" class="btn btn-outline-success">
+                View All <i class="bi bi-arrow-right ms-1"></i>
+            </a>
+        </div>
+        <div class="row g-3">
+            {% for disease in sample_diseases[:6] %}
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 border-0 shadow-sm disease-card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <span class="badge bg-{{ 'success' if disease.category == 'healthy' else 'warning' }}">{{ disease.plant_type }}</span>
+                            <small class="text-muted">{{ disease.category }}</small>
+                        </div>
+                        <h6 class="card-title fw-bold">{{ disease.disease_name }}</h6>
+                        <p class="card-text small text-muted">{{ disease.description[:100] }}...</p>
+                    </div>
+                    <div class="card-footer bg-transparent border-0">
+                        <a href="{{ url_for('main.disease_detail', disease_id=disease.id) }}" class="btn btn-sm btn-outline-success">
+                            Learn More <i class="bi bi-arrow-right-short"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-5 bg-success text-white">
+    <div class="container text-center">
+        <h2 class="fw-bold mb-3">Ready to Protect Your Plants?</h2>
+        <p class="lead mb-4">Join thousands of farmers and gardeners using AI for plant health</p>
+        {% if current_user.is_authenticated %}
+        <a href="{{ url_for('user.detect') }}" class="btn btn-light btn-lg text-success fw-semibold">
+            <i class="bi bi-camera me-2"></i>Start Detection Now
+        </a>
+        {% else %}
+        <a href="{{ url_for('auth.register') }}" class="btn btn-light btn-lg text-success fw-semibold me-3">
+            <i class="bi bi-rocket-takeoff me-2"></i>Get Started Free
+        </a>
+        <a href="{{ url_for('main.how_it_works') }}" class="btn btn-outline-light btn-lg">
+            Learn More
+        </a>
+        {% endif %}
+    </div>
+</section>
+
+<!-- About Preview -->
+<section class="py-5">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6">
+                <h2 class="fw-bold mb-4">About This Project</h2>
+                <p class="text-muted lead mb-4">
+                    This Plant Disease Detection System is a Final Year Project developed by Fawad Ali and Syed Asad Ullah.
+                </p>
+                <ul class="list-unstyled mb-4">
+                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Deep Learning powered by CNN (ResNet50/MobileNetV2)</li>
+                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Trained on PlantVillage dataset (38 disease classes)</li>
+                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Supports 14 plant species including Tomato, Apple, Corn, and more</li>
+                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Comprehensive treatment and prevention recommendations</li>
+                </ul>
+                <a href="{{ url_for('main.about') }}" class="btn btn-success">
+                    <i class="bi bi-info-circle me-2"></i>Learn More About Us
+                </a>
+            </div>
+            <div class="col-lg-6">
+                <div class="tech-stack p-4 bg-light rounded-4">
+                    <h5 class="fw-bold mb-3">Technology Stack</h5>
+                    <div class="row g-3">
+                        <div class="col-6">
+                            <div class="tech-item bg-white p-3 rounded-3 shadow-sm text-center">
+                                <i class="bi bi-braces text-success fs-4 mb-2"></i>
+                                <div class="small fw-semibold">TensorFlow/Keras</div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="tech-item bg-white p-3 rounded-3 shadow-sm text-center">
+                                <i class="bi bi-filetype-py text-success fs-4 mb-2"></i>
+                                <div class="small fw-semibold">Python/Flask</div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="tech-item bg-white p-3 rounded-3 shadow-sm text-center">
+                                <i class="bi bi-bootstrap text-success fs-4 mb-2"></i>
+                                <div class="small fw-semibold">Bootstrap 5</div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="tech-item bg-white p-3 rounded-3 shadow-sm text-center">
+                                <i class="bi bi-database text-success fs-4 mb-2"></i>
+                                <div class="small fw-semibold">SQLAlchemy</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

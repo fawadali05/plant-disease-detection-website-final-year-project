@@ -1,0 +1,397 @@
+/* PlantDoc - Custom CSS Styles */
+
+/* ================================
+   Base Styles
+   ================================ */
+:root {
+    --primary-color: #2E7D32;
+    --secondary-color: #1976D2;
+    --success-color: #4CAF50;
+    --warning-color: #FF9800;
+    --danger-color: #F44336;
+    --light-bg: #F8F9FA;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #FFFFFF;
+    color: #333333;
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+/* ================================
+   Navigation
+   ================================ */
+.navbar {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+.nav-link {
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* ================================
+   Buttons
+   ================================ */
+.btn-success {
+    background-color: var(--success-color);
+    border-color: var(--success-color);
+    transition: all 0.2s ease;
+}
+
+.btn-success:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(46, 125, 50, 0.3);
+}
+
+.btn-outline-success:hover {
+    background-color: var(--success-color);
+    border-color: var(--success-color);
+    color: white;
+}
+
+/* ================================
+   Cards
+   ================================ */
+.card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.disease-card {
+    transition: all 0.3s ease;
+}
+
+.disease-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.feature-card {
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.feature-card:hover .feature-icon {
+    transform: scale(1.1);
+}
+
+.feature-icon {
+    transition: transform 0.3s ease;
+}
+
+/* ================================
+   Hero Section
+   ================================ */
+.hero-section {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--success-color) 100%);
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+}
+
+.hero-image {
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+/* ================================
+   Stats Section
+   ================================ */
+.stat-card {
+    transition: transform 0.2s ease;
+}
+
+.stat-card:hover {
+    transform: scale(1.02);
+}
+
+/* ================================
+   Forms
+   ================================ */
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--success-color);
+    box-shadow: 0 0 0 0.2rem rgba(76, 175, 80, 0.25);
+}
+
+.form-control-lg {
+    padding: 0.875rem 1rem;
+}
+
+/* ================================
+   Upload Area
+   ================================ */
+.upload-area {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.upload-area:hover {
+    background-color: rgba(76, 175, 80, 0.05);
+}
+
+.upload-area.border-dashed {
+    border-style: dashed !important;
+}
+
+.upload-area.border-success {
+    border-style: solid !important;
+    border-width: 3px !important;
+}
+
+/* ================================
+   Progress Bars
+   ================================ */
+.progress {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    transition: width 1s ease;
+}
+
+/* ================================
+   Tables
+   ================================ */
+.table {
+    font-size: 0.9rem;
+}
+
+.table thead th {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+    color: #666;
+}
+
+.table tbody tr:hover {
+    background-color: rgba(76, 175, 80, 0.05);
+}
+
+/* ================================
+   Badges
+   ================================ */
+.badge {
+    font-weight: 500;
+    padding: 0.35em 0.65em;
+}
+
+/* ================================
+   Alerts
+   ================================ */
+.alert {
+    border: none;
+    border-radius: 8px;
+}
+
+.alert-success {
+    background-color: rgba(76, 175, 80, 0.1);
+    color: var(--success-color);
+}
+
+.alert-danger {
+    background-color: rgba(244, 67, 54, 0.1);
+    color: var(--danger-color);
+}
+
+.alert-warning {
+    background-color: rgba(255, 152, 0, 0.1);
+    color: var(--warning-color);
+}
+
+.alert-info {
+    background-color: rgba(25, 118, 210, 0.1);
+    color: var(--secondary-color);
+}
+
+/* ================================
+   Footer
+   ================================ */
+footer {
+    background-color: #1a1a1a;
+}
+
+footer a {
+    transition: color 0.2s ease;
+}
+
+footer a:hover {
+    color: var(--success-color) !important;
+}
+
+.social-links a {
+    font-size: 1.25rem;
+    transition: transform 0.2s ease;
+}
+
+.social-links a:hover {
+    transform: translateY(-3px);
+}
+
+/* ================================
+   Admin Panel
+   ================================ */
+.admin-sidebar {
+    background-color: #f8f9fa;
+    min-height: calc(100vh - 70px);
+}
+
+/* ================================
+   Dashboard Stats
+   ================================ */
+.dashboard-stat {
+    background: linear-gradient(135deg, var(--success-color) 0%, var(--primary-color) 100%);
+    color: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+/* ================================
+   Charts
+   ================================ */
+.chart-container {
+    position: relative;
+    height: 300px;
+}
+
+/* ================================
+   Loading Spinner
+   ================================ */
+.spinner-border-success {
+    color: var(--success-color);
+}
+
+/* ================================
+   Animations
+   ================================ */
+.fade-in {
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.slide-in {
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* ================================
+   Responsive Adjustments
+   ================================ */
+@media (max-width: 768px) {
+    .hero-section {
+        min-height: auto;
+        padding: 3rem 0;
+    }
+    
+    .hero-image {
+        margin-top: 2rem;
+    }
+    
+    .display-4 {
+        font-size: 2rem;
+    }
+    
+    .card:hover {
+        transform: none;
+    }
+    
+    .disease-card:hover {
+        transform: none;
+    }
+}
+
+/* ================================
+   Utilities
+   ================================ */
+.text-success {
+    color: var(--success-color) !important;
+}
+
+.bg-success {
+    background-color: var(--success-color) !important;
+}
+
+.border-success {
+    border-color: var(--success-color) !important;
+}
+
+/* ================================
+   Custom Scrollbar
+   ================================ */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--success-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color);
+}
+
+/* ================================
+   Print Styles
+   ================================ */
+@media print {
+    .navbar,
+    .footer,
+    .btn,
+    .no-print {
+        display: none !important;
+    }
+    
+    body {
+        font-size: 12pt;
+    }
+    
+    .card {
+        box-shadow: none !important;
+        border: 1px solid #ddd;
+    }
+}

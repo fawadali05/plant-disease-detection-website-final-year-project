@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-4 mt-5">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="mb-3">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('main.home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('user.history') }}">History</a></li>
+            <li class="breadcrumb-item active">Detection #{{ detection.id }}</li>
+        </ol>
+    </nav>
+
+    <div class="row g-4">
+        <!-- Result Details -->
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm rounded-4 mb-4">
+                <div class="card-header bg-white py-3">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0 fw-bold">Detection #{{ detection.id }}</h5>
+                        <small class="text-muted">{{ detection.detected_at.strftime('%B %d, %Y at %I:%M %p') }}</small>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <img src="{{ url_for('static', filename='uploads/' + detection.image_path) }}" 
+                                 alt="Uploaded leaf image" class="img-fluid rounded-3">
+                        </div>
+                        <div class="col-md-7">
+                            <div class="mb-3">
+                                <span class="badge bg-danger mb-2">Detected</span>
+                                <h4 class="fw-bold mb-1">{{ detection.disease_name }}</h4>
+                                <p class="text-muted mb-0">
+                                    <i class="bi bi-flower1 me-1"></i>{{ detection.plant_type }}
+                                </p>
+                            </div>
+                            
+                            <div class="bg-light rounded-3 p-3 mb-3">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span class="fw-semibold">Confidence Score</span>
+                                    <span class="badge bg-{{ 'success' if detection.confidence > 80 else 'warning' }} fs-6">
+                                        {{ "%.1f"|format(detection.confidence) }}%
+                                    </span>
+                                </div>
+                                <div class="progress" style="height: 8px;">
+                                    <div class="progress-bar bg-{{ 'success' if detection.confidence > 80 else 'warning' }}" 
+                                         role="progressbar" style="width: {{ detection.confidence }}%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Disease Information -->
+            {% if disease_info %}
+            <div class="card border-0 shadow-sm rounded-4">
+                <div class="card-header bg-light py-3">
+                    <h5 class="mb-0 fw-bold">Disease Information</h5>
+                </div>
+                <div class="card-body">
+                    {% if disease_info.description %}
+                    <div class="mb-4">
+                        <h6 class="fw-bold text-success">Description</h6>
+                        <p class="text-muted">{{ disease_info.description }}</p>
+                    </div>
+                    {% endif %}
+
+                    {% if disease_info.treatment %}
+                    <div class="mb-4">
+                        <h6 class="fw-bold text-primary">Treatment</h6>
+                        <p class="text-muted">{{ disease_info.treatment }}</p>
+                    </div>
+                    {% endif %}
+
+                    {% if disease_info.prevention %}
+                    <div class="mb-4">
+                        <h6 class="fw-bold text-info">Prevention</h6>
+                        <p class="text-muted">{{ disease_info.prevention }}</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Actions Sidebar -->
+        <div class="col-lg-4">
+            <div class="card border-0 shadow-sm rounded-4 mb-4">
+                <div class="card-body">
+                    <h6 class="fw-bold mb-3">Actions</h6>
+                    <div class="d-grid gap-2">
+                        <a href="{{ url_for('user.download_report', detection_id=detection.id) }}" 
+                           class="btn btn-success">
+                            <i class="bi bi-download me-2"></i>Download PDF Report
+                        </a>
+                        <a href="{{ url_for('user.detect') }}" class="btn btn-outline-success">
+                            <i class="bi bi-plus-lg me-2"></i>New Detection
+                        </a>
+                        <form method="POST" action="{{ url_for('user.delete_detection', detection_id=detection.id) }}" 
+                              onsubmit="return confirm('Are you sure you want to delete this detection?');">
+                            <button type="submit" class="btn btn-outline-danger w-100">
+                                <i class="bi bi-trash me-2"></i>Delete Detection
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Back to History -->
+            <div class="card border-0 shadow-sm rounded-4">
+                <div class="card-body">
+                    <a href="{{ url_for('user.history') }}" class="text-success text-decoration-none">
+                        <i class="bi bi-arrow-left me-2"></i>Back to History
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

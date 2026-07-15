@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Hero -->
+<section class="bg-success text-white py-5">
+    <div class="container py-5 text-center">
+        <h1 class="display-4 fw-bold mb-3">Disease Database</h1>
+        <p class="lead">Browse our comprehensive collection of plant diseases and treatments</p>
+    </div>
+</section>
+
+<!-- Filter Section -->
+<section class="py-4 bg-light">
+    <div class="container">
+        <form method="GET" class="row g-3 align-items-end">
+            <div class="col-md-4">
+                <label class="form-label small fw-semibold">Search</label>
+                <input type="text" name="search" class="form-control" placeholder="Search diseases..." value="{{ search_query or '' }}">
+            </div>
+            <div class="col-md-3">
+                <label class="form-label small fw-semibold">Category</label>
+                <select name="category" class="form-select">
+                    <option value="">All Categories</option>
+                    {% for cat, count in categories %}
+                    <option value="{{ cat }}" {% if selected_category == cat %}selected{% endif %}>{{ cat|title }} ({{ count }})</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label small fw-semibold">Plant Type</label>
+                <select name="plant" class="form-select">
+                    <option value="">All Plants</option>
+                    {% for plant in plant_types %}
+                    <option value="{{ plant }}" {% if selected_plant == plant %}selected{% endif %}>{{ plant }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-success w-100">
+                    <i class="bi bi-search me-2"></i>Filter
+                </button>
+            </div>
+        </form>
+    </div>
+</section>
+
+<!-- Diseases Grid -->
+<section class="py-5">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <p class="text-muted mb-0">{{ diseases|length }} disease(s) found</p>
+            {% if current_user.is_authenticated and current_user.role == 'admin' %}
+            <a href="{{ url_for('admin.add_disease') }}" class="btn btn-success">
+                <i class="bi bi-plus-lg me-2"></i>Add Disease
+            </a>
+            {% endif %}
+        </div>
+        
+        {% if diseases %}
+        <div class="row g-4">
+            {% for disease in diseases %}
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 border-0 shadow-sm disease-card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div>
+                                <span class="badge bg-{{ 'success' if disease.category == 'healthy' else 'warning' }} mb-2">
+                                    {{ disease.plant_type }}
+                                </span>
+                                <span class="badge bg-secondary">{{ disease.category }}</span>
+                            </div>
+                            {% if disease.severity %}
+                            {% if disease.severity == 'critical' %}
+                            <span class="badge bg-danger">Critical</span>
+                            {% elif disease.severity == 'high' %}
+                            <span class="badge bg-warning">High</span>
+                            {% elif disease.severity == 'moderate' %}
+                            <span class="badge bg-info">Moderate</span>
+                            {% else %}
+                            <span class="badge bg-success">Low</span>
+                            {% endif %}
+                            {% endif %}
+                        </div>
+                        <h5 class="card-title fw-bold mb-2">{{ disease.disease_name }}</h5>
+                        <p class="card-text text-muted small">{{ disease.description[:150] }}...</p>
+                        
+                        {% if disease.treatment %}
+                        <div class="treatment-preview bg-light rounded-2 p-2 mb-3">
+                            <small class="text-success fw-semibold">Treatment:</small>
+                            <p class="small text-muted mb-0">{{ disease.treatment[:100] }}...</p>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="card-footer bg-transparent border-0">
+                        <a href="{{ url_for('main.disease_detail', disease_id=disease.id) }}" 
+                           class="btn btn-outline-success btn-sm w-100">
+                            View Details <i class="bi bi-arrow-right-short ms-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="text-center py-5">
+            <i class="bi bi-search text-muted fs-1 mb-3 d-block"></i>
+            <h5 class="text-muted">No diseases found</h5>
+            <p class="text-muted">Try adjusting your search or filter criteria</p>
+            <a href="{{ url_for('main.diseases_list') }}" class="btn btn-outline-success">Clear Filters</a>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

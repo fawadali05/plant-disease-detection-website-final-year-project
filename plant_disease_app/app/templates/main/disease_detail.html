@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-4 mt-5">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="mb-3">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('main.home') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('main.diseases_list') }}">Diseases</a></li>
+            <li class="breadcrumb-item active">{{ disease.disease_name }}</li>
+        </ol>
+    </nav>
+
+    <div class="row g-4">
+        <!-- Main Content -->
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-lg rounded-4 overflow-hidden mb-4">
+                <div class="card-header bg-success text-white py-3">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <span class="badge bg-light text-success me-2">{{ disease.plant_type }}</span>
+                            <span class="badge bg-warning text-dark">{{ disease.category }}</span>
+                        </div>
+                        {% if disease.severity %}
+                        <span class="badge bg-{{ 'danger' if disease.severity == 'critical' else 'warning' }}">
+                            Severity: {{ disease.severity|title }}
+                        </span>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="card-body p-4">
+                    <h2 class="fw-bold mb-4">{{ disease.disease_name }}</h2>
+                    
+                    {% if disease.description %}
+                    <div class="mb-4">
+                        <h5 class="fw-bold text-success mb-2">
+                            <i class="bi bi-info-circle me-2"></i>Description
+                        </h5>
+                        <p class="text-muted">{{ disease.description }}</p>
+                    </div>
+                    {% endif %}
+
+                    {% if disease.symptoms %}
+                    <div class="mb-4">
+                        <h5 class="fw-bold text-primary mb-2">
+                            <i class="bi bi-exclamation-triangle me-2"></i>Symptoms
+                        </h5>
+                        <p class="text-muted">{{ disease.symptoms }}</p>
+                    </div>
+                    {% endif %}
+
+                    {% if disease.causes %}
+                    <div class="mb-4">
+                        <h5 class="fw-bold text-danger mb-2">
+                            <i class="bi bi-bug me-2"></i>Causes
+                        </h5>
+                        <p class="text-muted">{{ disease.causes }}</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-lg-4">
+            <!-- Treatment Card -->
+            {% if disease.treatment %}
+            <div class="card border-0 shadow-sm rounded-4 mb-4">
+                <div class="card-header bg-success bg-opacity-10 py-3">
+                    <h5 class="mb-0 fw-bold text-success">
+                        <i class="bi bi-heart-pulse me-2"></i>Treatment
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted">{{ disease.treatment }}</p>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Prevention Card -->
+            {% if disease.prevention %}
+            <div class="card border-0 shadow-sm rounded-4 mb-4">
+                <div class="card-header bg-primary bg-opacity-10 py-3">
+                    <h5 class="mb-0 fw-bold text-primary">
+                        <i class="bi bi-shield-check me-2"></i>Prevention
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted">{{ disease.prevention }}</p>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Pesticides Card -->
+            {% if disease.pesticides %}
+            <div class="card border-0 shadow-sm rounded-4 mb-4">
+                <div class="card-header bg-warning bg-opacity-10 py-3">
+                    <h5 class="mb-0 fw-bold text-warning">
+                        <i class="bi bi-spray-can me-2"></i>Recommended Pesticides
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted">{{ disease.pesticides }}</p>
+                    <div class="alert alert-warning small py-2 mb-0">
+                        <i class="bi bi-exclamation-triangle me-2"></i>
+                        Always follow label instructions.
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Recovery Time -->
+            {% if disease.recovery_time %}
+            <div class="card border-0 shadow-sm rounded-4 mb-4">
+                <div class="card-body">
+                    <h6 class="fw-bold mb-2">
+                        <i class="bi bi-clock-history text-success me-2"></i>Recovery Time
+                    </h6>
+                    <p class="text-muted mb-0">{{ disease.recovery_time }}</p>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Action Buttons -->
+            <div class="d-grid gap-2">
+                {% if current_user.is_authenticated %}
+                <a href="{{ url_for('user.detect') }}" class="btn btn-success">
+                    <i class="bi bi-camera me-2"></i>Detect This Disease
+                </a>
+                {% else %}
+                <a href="{{ url_for('auth.register') }}" class="btn btn-success">
+                    <i class="bi bi-rocket-takeoff me-2"></i>Get Started
+                </a>
+                {% endif %}
+                <a href="{{ url_for('main.diseases_list') }}" class="btn btn-outline-secondary">
+                    <i class="bi bi-arrow-left me-2"></i>Back to Diseases
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

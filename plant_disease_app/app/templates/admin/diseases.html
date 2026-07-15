@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-4 mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold mb-1">Disease Database</h2>
+            <p class="text-muted mb-0">Manage plant disease information</p>
+        </div>
+        <a href="{{ url_for('admin.add_disease') }}" class="btn btn-success">
+            <i class="bi bi-plus-lg me-2"></i>Add Disease
+        </a>
+    </div>
+
+    <!-- Search -->
+    <div class="card border-0 shadow-sm rounded-4 mb-4">
+        <div class="card-body">
+            <form method="GET" class="row g-3">
+                <div class="col-md-10">
+                    <input type="text" name="search" class="form-control" 
+                           placeholder="Search diseases..." value="{{ search or '' }}">
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-success w-100">Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Diseases Table -->
+    <div class="card border-0 shadow-sm rounded-4">
+        <div class="card-body p-0">
+            {% if diseases %}
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead class="bg-light">
+                        <tr>
+                            <th class="border-0 py-3">Disease</th>
+                            <th class="border-0 py-3">Plant</th>
+                            <th class="border-0 py-3">Category</th>
+                            <th class="border-0 py-3">Severity</th>
+                            <th class="border-0 py-3 text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for disease in diseases %}
+                        <tr>
+                            <td class="py-3">
+                                <div class="fw-semibold">{{ disease.disease_name }}</div>
+                            </td>
+                            <td class="py-3">
+                                <span class="badge bg-light text-dark">{{ disease.plant_type }}</span>
+                            </td>
+                            <td class="py-3">
+                                <span class="badge bg-secondary">{{ disease.category }}</span>
+                            </td>
+                            <td class="py-3">
+                                <span class="badge bg-{{ 'danger' if disease.severity == 'critical' else 'warning' }}">
+                                    {{ disease.severity|title }}
+                                </span>
+                            </td>
+                            <td class="py-3 text-center">
+                                <div class="btn-group btn-group-sm">
+                                    <a href="{{ url_for('main.disease_detail', disease_id=disease.id) }}" 
+                                       class="btn btn-outline-success">
+                                        <i class="bi bi-eye"></i>
+                                    </a>
+                                    <a href="{{ url_for('admin.edit_disease', disease_id=disease.id) }}" 
+                                       class="btn btn-outline-primary">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <form method="POST" action="{{ url_for('admin.delete_disease', disease_id=disease.id) }}"
+                                          onsubmit="return confirm('Are you sure?');">
+                                        <button type="submit" class="btn btn-outline-danger">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            {% if pagination.pages > 1 %}
+            <div class="card-footer bg-transparent border-0">
+                <nav>
+                    <ul class="pagination justify-content-center mb-0">
+                        <li class="page-item {{ 'disabled' if not pagination.has_prev }}">
+                            <a class="page-link" href="{{ url_for('admin.diseases', page=pagination.prev_num) }}">Previous</a>
+                        </li>
+                        {% for page_num in pagination.iter_pages(left_edge=1, right_edge=1) %}
+                            {% if page_num %}
+                                <li class="page-item {{ 'active' if page_num == page }}">
+                                    <a class="page-link" href="{{ url_for('admin.diseases', page=page_num) }}">{{ page_num }}</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                        <li class="page-item {{ 'disabled' if not pagination.has_next }}">
+                            <a class="page-link" href="{{ url_for('admin.diseases', page=pagination.next_num) }}">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            {% endif %}
+
+            {% else %}
+            <div class="text-center py-5">
+                <i class="bi bi-virus text-muted fs-1 mb-3 d-block"></i>
+                <h5 class="text-muted">No diseases found</h5>
+                <a href="{{ url_for('admin.add_disease') }}" class="btn btn-success">Add First Disease</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

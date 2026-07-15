@@ -1,0 +1,222 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Hero -->
+<section class="bg-success text-white py-5">
+    <div class="container text-center py-5">
+        <h1 class="display-4 fw-bold mb-3">How It Works</h1>
+        <p class="lead">Get started with plant disease detection in four simple steps</p>
+    </div>
+</section>
+
+<!-- Steps Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row g-5">
+            <!-- Step 1 -->
+            <div class="col-lg-6">
+                <div class="d-flex">
+                    <div class="flex-shrink-0">
+                        <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center fw-bold fs-3" 
+                             style="width: 80px; height: 80px;">1</div>
+                    </div>
+                    <div class="ms-4">
+                        <h3 class="fw-bold mb-3">Upload Your Image</h3>
+                        <p class="text-muted mb-3">
+                            Take a clear photo of a plant leaf showing symptoms, or upload an existing image 
+                            from your gallery. For best results, ensure good lighting and focus on the affected area.
+                        </p>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Supported formats: JPG, PNG, GIF</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Maximum file size: 16MB</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Ensure the leaf with symptoms is clearly visible</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Step 2 -->
+            <div class="col-lg-6">
+                <div class="d-flex">
+                    <div class="flex-shrink-0">
+                        <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center fw-bold fs-3" 
+                             style="width: 80px; height: 80px;">2</div>
+                    </div>
+                    <div class="ms-4">
+                        <h3 class="fw-bold mb-3">AI Analysis</h3>
+                        <p class="text-muted mb-3">
+                            Our deep learning model, trained on the PlantVillage dataset with over 50,000 images, 
+                            analyzes your image to identify disease patterns and classify the condition.
+                        </p>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Powered by CNN (ResNet50/MobileNetV2)</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>38 disease classes across 14 plant species</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Processing takes just a few seconds</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Step 3 -->
+            <div class="col-lg-6">
+                <div class="d-flex">
+                    <div class="flex-shrink-0">
+                        <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center fw-bold fs-3" 
+                             style="width: 80px; height: 80px;">3</div>
+                    </div>
+                    <div class="ms-4">
+                        <h3 class="fw-bold mb-3">Get Diagnosis</h3>
+                        <p class="text-muted mb-3">
+                            Receive instant diagnosis with the disease name, affected plant type, and a 
+                            confidence score indicating how certain the AI is about the prediction.
+                        </p>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Detailed disease information</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Category classification (fungal, bacterial, viral)</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Multiple prediction options shown</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Step 4 -->
+            <div class="col-lg-6">
+                <div class="d-flex">
+                    <div class="flex-shrink-0">
+                        <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center fw-bold fs-3" 
+                             style="width: 80px; height: 80px;">4</div>
+                    </div>
+                    <div class="ms-4">
+                        <h3 class="fw-bold mb-3">Treatment Recommendations</h3>
+                        <p class="text-muted mb-3">
+                            Get comprehensive treatment plans including organic and chemical options, 
+                            prevention tips, and recommended pesticides for effective recovery.
+                        </p>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Step-by-step treatment guide</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Prevention and recovery tips</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Downloadable PDF report</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Plant Types Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold mb-3">Supported Plant Species</h2>
+            <p class="text-muted">Our system can detect diseases across 14 different plant species</p>
+        </div>
+        <div class="row g-4 justify-content-center">
+            <div class="col-lg-2 col-md-3 col-4 text-center">
+                <div class="plant-badge p-3 bg-white rounded-3 shadow-sm">
+                    <i class="bi bi-flower1 text-success fs-3 mb-2 d-block"></i>
+                    <small class="fw-semibold">Apple</small>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-4 text-center">
+                <div class="plant-badge p-3 bg-white rounded-3 shadow-sm">
+                    <i class="bi bi-flower1 text-success fs-3 mb-2 d-block"></i>
+                    <small class="fw-semibold">Blueberry</small>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-4 text-center">
+                <div class="plant-badge p-3 bg-white rounded-3 shadow-sm">
+                    <i class="bi bi-flower1 text-success fs-3 mb-2 d-block"></i>
+                    <small class="fw-semibold">Cherry</small>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-4 text-center">
+                <div class="plant-badge p-3 bg-white rounded-3 shadow-sm">
+                    <i class="bi bi-flower1 text-success fs-3 mb-2 d-block"></i>
+                    <small class="fw-semibold">Corn</small>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-4 text-center">
+                <div class="plant-badge p-3 bg-white rounded-3 shadow-sm">
+                    <i class="bi bi-flower1 text-success fs-3 mb-2 d-block"></i>
+                    <small class="fw-semibold">Grape</small>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-4 text-center">
+                <div class="plant-badge p-3 bg-white rounded-3 shadow-sm">
+                    <i class="bi bi-flower1 text-success fs-3 mb-2 d-block"></i>
+                    <small class="fw-semibold">Orange</small>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-4 text-center">
+                <div class="plant-badge p-3 bg-white rounded-3 shadow-sm">
+                    <i class="bi bi-flower1 text-success fs-3 mb-2 d-block"></i>
+                    <small class="fw-semibold">Peach</small>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-4 text-center">
+                <div class="plant-badge p-3 bg-white rounded-3 shadow-sm">
+                    <i class="bi bi-flower1 text-success fs-3 mb-2 d-block"></i>
+                    <small class="fw-semibold">Pepper</small>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-4 text-center">
+                <div class="plant-badge p-3 bg-white rounded-3 shadow-sm">
+                    <i class="bi bi-flower1 text-success fs-3 mb-2 d-block"></i>
+                    <small class="fw-semibold">Potato</small>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-4 text-center">
+                <div class="plant-badge p-3 bg-white rounded-3 shadow-sm">
+                    <i class="bi bi-flower1 text-success fs-3 mb-2 d-block"></i>
+                    <small class="fw-semibold">Raspberry</small>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-4 text-center">
+                <div class="plant-badge p-3 bg-white rounded-3 shadow-sm">
+                    <i class="bi bi-flower1 text-success fs-3 mb-2 d-block"></i>
+                    <small class="fw-semibold">Soybean</small>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-4 text-center">
+                <div class="plant-badge p-3 bg-white rounded-3 shadow-sm">
+                    <i class="bi bi-flower1 text-success fs-3 mb-2 d-block"></i>
+                    <small class="fw-semibold">Squash</small>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-4 text-center">
+                <div class="plant-badge p-3 bg-white rounded-3 shadow-sm">
+                    <i class="bi bi-flower1 text-success fs-3 mb-2 d-block"></i>
+                    <small class="fw-semibold">Strawberry</small>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-4 text-center">
+                <div class="plant-badge p-3 bg-white rounded-3 shadow-sm">
+                    <i class="bi bi-flower1 text-success fs-3 mb-2 d-block"></i>
+                    <small class="fw-semibold">Tomato</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-5 bg-success text-white">
+    <div class="container text-center">
+        <h2 class="fw-bold mb-3">Ready to Get Started?</h2>
+        <p class="lead mb-4">Start detecting plant diseases in just a few clicks</p>
+        {% if current_user.is_authenticated %}
+        <a href="{{ url_for('user.detect') }}" class="btn btn-light btn-lg text-success fw-semibold">
+            <i class="bi bi-camera me-2"></i>Start Detection
+        </a>
+        {% else %}
+        <a href="{{ url_for('auth.register') }}" class="btn btn-light btn-lg text-success fw-semibold me-3">
+            <i class="bi bi-rocket-takeoff me-2"></i>Get Started Free
+        </a>
+        <a href="{{ url_for('auth.login') }}" class="btn btn-outline-light btn-lg">
+            Login
+        </a>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-4 mt-5">
+    <div class="text-center mb-4">
+        <h2 class="fw-bold mb-2">Detection Results</h2>
+        <p class="text-muted">AI-powered analysis of your plant image</p>
+    </div>
+
+    <div class="row g-4">
+        <!-- Main Result -->
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-lg rounded-4 overflow-hidden mb-4">
+                <div class="card-header bg-success text-white py-3">
+                    <h5 class="mb-0 fw-bold">
+                        <i class="bi bi-clipboard-check me-2"></i>Diagnosis
+                    </h5>
+                </div>
+                <div class="card-body p-4">
+                    <div class="row align-items-center">
+                        <div class="col-md-5">
+                            <img src="{{ url_for('static', filename='uploads/' + results.image_path) }}" 
+                                 alt="Uploaded leaf image" class="img-fluid rounded-3 shadow-sm">
+                        </div>
+                        <div class="col-md-7">
+                            <div class="result-details">
+                                <div class="mb-3">
+                                    <span class="badge bg-{{ 'success' if results.category == 'healthy' else 'danger' }} mb-2">
+                                        {{ results.category|upper }}
+                                    </span>
+                                    <h3 class="fw-bold mb-1">{{ results.disease_name }}</h3>
+                                    <p class="text-muted mb-2">
+                                        <i class="bi bi-flower1 me-1"></i>{{ results.plant_type }}
+                                    </p>
+                                </div>
+                                
+                                <div class="confidence-section bg-light rounded-3 p-3 mb-3">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <span class="fw-semibold">Confidence Score</span>
+                                        <span class="badge bg-{{ 'success' if results.confidence > 80 else 'warning' }} fs-6">
+                                            {{ "%.1f"|format(results.confidence) }}%
+                                        </span>
+                                    </div>
+                                    <div class="progress" style="height: 10px;">
+                                        <div class="progress-bar bg-{{ 'success' if results.confidence > 80 else 'warning' }}" 
+                                             role="progressbar" style="width: {{ results.confidence }}%">
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="d-grid gap-2">
+                                    <a href="{{ url_for('user.download_report', detection_id=results.detection_id) }}" 
+                                       class="btn btn-outline-success">
+                                        <i class="bi bi-download me-2"></i>Download PDF Report
+                                    </a>
+                                    <a href="{{ url_for('user.detect') }}" class="btn btn-outline-secondary">
+                                        <i class="bi bi-plus-lg me-2"></i>New Detection
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Other Predictions -->
+            {% if results.all_predictions|length > 1 %}
+            <div class="card border-0 shadow-sm rounded-4">
+                <div class="card-body p-4">
+                    <h5 class="fw-bold mb-3">Other Possible Conditions</h5>
+                    <div class="row g-3">
+                        {% for pred in results.all_predictions[1:4] %}
+                        <div class="col-md-4">
+                            <div class="border rounded-3 p-3 text-center">
+                                <div class="fw-bold">{{ pred.disease_name }}</div>
+                                <small class="text-muted">{{ pred.plant_type }}</small>
+                                <div class="mt-2">
+                                    <span class="badge bg-secondary">{{ "%.1f"|format(pred.confidence) }}%</span>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Disease Information -->
+        <div class="col-lg-4">
+            {% if results.disease_info %}
+            <div class="card border-0 shadow-sm rounded-4 mb-4">
+                <div class="card-header bg-light py-3">
+                    <h5 class="mb-0 fw-bold">
+                        <i class="bi bi-info-circle text-success me-2"></i>Disease Information
+                    </h5>
+                </div>
+                <div class="card-body">
+                    {% if results.disease_info.description %}
+                    <div class="mb-4">
+                        <h6 class="fw-bold text-success">Description</h6>
+                        <p class="text-muted small">{{ results.disease_info.description }}</p>
+                    </div>
+                    {% endif %}
+
+                    {% if results.disease_info.symptoms %}
+                    <div class="mb-4">
+                        <h6 class="fw-bold text-success">Symptoms</h6>
+                        <p class="text-muted small">{{ results.disease_info.symptoms }}</p>
+                    </div>
+                    {% endif %}
+
+                    {% if results.disease_info.causes %}
+                    <div class="mb-4">
+                        <h6 class="fw-bold text-success">Causes</h6>
+                        <p class="text-muted small">{{ results.disease_info.causes }}</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Treatment Recommendations -->
+            {% if results.disease_info and results.disease_info.treatment %}
+            <div class="card border-0 shadow-sm rounded-4 mb-4">
+                <div class="card-header bg-success bg-opacity-10 py-3">
+                    <h5 class="mb-0 fw-bold text-success">
+                        <i class="bi bi-heart-pulse me-2"></i>Treatment
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted">{{ results.disease_info.treatment }}</p>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Prevention Tips -->
+            {% if results.disease_info and results.disease_info.prevention %}
+            <div class="card border-0 shadow-sm rounded-4 mb-4">
+                <div class="card-header bg-primary bg-opacity-10 py-3">
+                    <h5 class="mb-0 fw-bold text-primary">
+                        <i class="bi bi-shield-check me-2"></i>Prevention
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted">{{ results.disease_info.prevention }}</p>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Recommended Pesticides -->
+            {% if results.disease_info and results.disease_info.pesticides %}
+            <div class="card border-0 shadow-sm rounded-4">
+                <div class="card-header bg-warning bg-opacity-10 py-3">
+                    <h5 class="mb-0 fw-bold text-warning">
+                        <i class="bi bi-spray-can me-2"></i>Recommended Pesticides
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted">{{ results.disease_info.pesticides }}</p>
+                    <div class="alert alert-warning small py-2 mb-0">
+                        <i class="bi bi-exclamation-triangle me-2"></i>
+                        Always follow product instructions and local regulations.
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
